@@ -91,11 +91,13 @@
     </Compile>
     <Compile Include="Models\Articulo.cs" />
     <Compile Include="Models\Categoria.cs" />
+    <Compile Include="Models\Imagen.cs" />
     <Compile Include="Models\Marca.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicio\AccesoDatos.cs" />
     <Compile Include="Servicio\ArticuloService.cs" />
     <Compile Include="Servicio\CategoriaService.cs" />
+    <Compile Include="Servicio\ImagenService.cs" />
     <Compile Include="Servicio\MarcaService.cs" />
   </ItemGroup>
   <ItemGroup>

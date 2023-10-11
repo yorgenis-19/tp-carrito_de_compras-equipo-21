@@ -15,8 +15,6 @@ namespace TPWinForm_equipo_21.Servicio
             SqlConnection conexion = new SqlConnection();
             SqlCommand comando = new SqlCommand();
             SqlDataReader lector;
-            MarcaDB marcaDB = new MarcaDB();
-            CategoriaDB categoriaDB = new CategoriaDB();
 
 
             try

@@ -13,8 +13,10 @@ namespace TPWinForm_equipo_21
     {
         ArticuloService articuloService = new ArticuloService();
         public List<Articulo> articulos = new List<Articulo>();
+        public List<Articulo> ListaArticulos { get; set; }
         protected void Page_Load(object sender, EventArgs e)
-        {     
+        {
+            ListaArticulos = articuloService.listar();
             if (Session["Carrito"] == null)
             {
                 List<Articulo> carrito = new List<Articulo>();

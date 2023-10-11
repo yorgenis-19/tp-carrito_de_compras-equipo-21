@@ -12,40 +12,38 @@ namespace TPWinForm_equipo_21
     public partial class index : System.Web.UI.Page
     {
         ArticuloService articuloService = new ArticuloService();
-        List<Articulo> articulos = new List<Articulo>();
+        public List<Articulo> articulos = new List<Articulo>();
         protected void Page_Load(object sender, EventArgs e)
-        {
-            dgvArticulos.DataSource = articuloService.listar();
-            dgvArticulos.DataBind();
-            /*if (!IsPostBack)
+        {     
+            if (Session["Carrito"] == null)
             {
-                articulos = articuloService.listar();
-                dgvArticulos.DataSource = articulos;
-                dgvArticulos.DataBind();
-                if (Session["Carrito"] is null)
-                {
-                    List<Articulo> carrito = new List<Articulo>();
-                    Session.Add("Carrito", carrito);
-                }
+                List<Articulo> carrito = new List<Articulo>();
+                Session.Add("Carrito", carrito);
+            }
+            articulos = articuloService.listar();
 
-            }*/
+            if (!IsPostBack)
+            {
+                repeaterArticulos.DataSource = articulos;
+                repeaterArticulos.DataBind();
+            }
+
+            updateContador();
+
         }
 
-        protected void dgvArticulos_SelectedIndexChanged(object sender, EventArgs e)
+        private void updateContador()
         {
-            /*int id = int.Parse(dgvArticulos.SelectedDataKey.Value.ToString());
-            Articulo newArticulo = new Articulo();
-            newArticulo = articuloService.buscarPorId(id);
-            if(!estaEnCarrito(newArticulo))
+            Label tamCarrito = Master.FindControl("tamCarrito") as Label;
+            if (tamCarrito != null)
             {
                 List<Articulo> carrito = new List<Articulo>();
                 carrito = (List<Articulo>)Session["Carrito"];
-                carrito.Add(newArticulo);
-            }*/
-
-            var test = dgvArticulos.SelectedRow.Cells[2];
-
+                tamCarrito.Text = carrito.Count.ToString();
+            }
         }
+
+
 
         private bool estaEnCarrito(Articulo articulo)
         {
@@ -54,7 +52,7 @@ namespace TPWinForm_equipo_21
 
             foreach (Articulo a in carrito)
             {
-                if(a == articulo)
+                if(a.id == articulo.id)
                 {
                     return true;
                 }
@@ -62,5 +60,26 @@ namespace TPWinForm_equipo_21
             return false;
         }
 
+
+        protected void btnCarrito_Click(object sender, EventArgs e)
+        {
+
+            int id = int.Parse(((Button)sender).CommandArgument);
+            Articulo articulo = new Articulo();
+            articulo = articuloService.buscarPorId(id);
+            if (!estaEnCarrito(articulo)){
+                Label1.Text = "Articulo " +  id.ToString() + " añadido al carrito";
+                List<Articulo> carrito = new List<Articulo>();
+                carrito = (List<Articulo>)Session["Carrito"];
+                carrito.Add(articulo);
+                updateContador();
+            }
+            else
+            {
+                Label1.Text = "Articulo ya añadido en carrito";
+            }
+            
+            
+        }
     }
 }

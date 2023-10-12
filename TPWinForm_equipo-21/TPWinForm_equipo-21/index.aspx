@@ -9,13 +9,14 @@
         }
 
         .card img{
+            width:250px;
             height:250px;
-            width: 250px;
         }
     </style>
 
 
-    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+
+    <asp:Label ID="Label1" runat="server" Text=" "></asp:Label>
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
         <asp:Repeater ID="repeater2" runat="server">
@@ -29,7 +30,8 @@
                             <p class="card-text">Categoria:<%# Eval("categoria") %></p>
                             <p class="card-text">Marca: <%# Eval("marca") %></p>
                             <p class="card-text">Precio: <%# Eval("precio") %></p>
-                            <asp:Button ID="btnCarrito" runat="server" Text="🛒" OnClick="btnCarrito_Click" CommandArgument='<%#Eval("id") %>' CommandName="idArticulo"/><td />
+                            <a class="card-text" href="DetalleArticulo.aspx?id=<%# Eval("id") %>">Ver Detalle</a>
+                            <asp:Button ID="btnCarrito" runat="server" Text="🛒" OnClick="btnCarrito_Click" CommandArgument='<%#Eval("id") %>' CommandName="idArticulo" CssClass="card-text"/><td />
                         </div>
                     </div>
                 </div>

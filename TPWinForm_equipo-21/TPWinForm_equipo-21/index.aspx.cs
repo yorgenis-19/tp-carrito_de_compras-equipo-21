@@ -26,8 +26,6 @@ namespace TPWinForm_equipo_21
 
             if (!IsPostBack)
             {
-                repeaterArticulos.DataSource = articulos;
-                repeaterArticulos.DataBind();
                 repeater2.DataSource = articulos;
                 repeater2.DataBind();
 

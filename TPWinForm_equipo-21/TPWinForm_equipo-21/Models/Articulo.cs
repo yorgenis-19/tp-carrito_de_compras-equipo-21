@@ -14,6 +14,7 @@ namespace TPWinForm_equipo_21.Models
         public Marca marca { get; set; }
         public Categoria categoria { get; set; }
         public decimal precio { get; set; }
+        public Imagen Imagen { get; set; }
 
     }
 }

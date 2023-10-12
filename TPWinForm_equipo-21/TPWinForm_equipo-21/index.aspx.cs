@@ -28,7 +28,11 @@ namespace TPWinForm_equipo_21
             {
                 repeaterArticulos.DataSource = articulos;
                 repeaterArticulos.DataBind();
+                repeater2.DataSource = articulos;
+                repeater2.DataBind();
+
             }
+
 
             updateContador();
 
@@ -66,11 +70,13 @@ namespace TPWinForm_equipo_21
         protected void btnCarrito_Click(object sender, EventArgs e)
         {
 
+
+
             int id = int.Parse(((Button)sender).CommandArgument);
             Articulo articulo = new Articulo();
             articulo = articuloService.buscarPorId(id);
             if (!estaEnCarrito(articulo)){
-                Label1.Text = "Articulo " +  id.ToString() + " añadido al carrito";
+                Label1.Text = articulo.nombre + " añadido al carrito";
                 List<Articulo> carrito = new List<Articulo>();
                 carrito = (List<Articulo>)Session["Carrito"];
                 carrito.Add(articulo);
@@ -78,10 +84,10 @@ namespace TPWinForm_equipo_21
             }
             else
             {
-                Label1.Text = "Articulo ya añadido en carrito";
+                Label1.Text = articulo.nombre + " ya añadido en carrito";
             }
-            
-            
+
+
         }
     }
 }

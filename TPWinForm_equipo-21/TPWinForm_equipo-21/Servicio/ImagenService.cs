@@ -83,6 +83,41 @@ namespace TPWinForm_equipo_21.Servicio
             }
         }
 
+        public Imagen listarUna(int idArticulo)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+
+            try
+            {
+                conexion.ConnectionString = "server=.\\SQLEXPRESS; database=CATALOGO_P3_DB; integrated security=true ";
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "SELECT TOP 1 * FROM IMAGENES WHERE IdArticulo = @idArticulo;";
+                comando.Parameters.AddWithValue("@idArticulo", idArticulo);
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+
+                Imagen imagen = new Imagen();
+                while (lector.Read())
+                {
+                    imagen.id = lector.GetInt32(0);
+                    imagen.idArticulo = lector.GetInt32(1);
+                    imagen.imagenUrl = (string)lector["ImagenUrl"];
+
+
+                }
+                conexion.Close();
+                return imagen;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public void agregar(Imagen imagen)
         {
             SqlConnection connection = new SqlConnection();

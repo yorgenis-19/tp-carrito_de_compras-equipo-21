@@ -36,7 +36,7 @@
                     <td><%# Eval("marca") %></td>
                     <td><%# Eval("categoria") %></td>
                     <td><%# Eval("precio") %></td>
-                    <td><a href="DetalleArticulo.aspx?id<%# Eval("id") %>">Ver Detalle</a></td>
+                    <td><a href="DetalleArticulo.aspx?id=<%# Eval("id") %>">Ver Detalle</a></td>
                     <td> <asp:Button ID="btnCarrito" runat="server" Text="🛒" OnClick="btnCarrito_Click" CommandArgument='<%#Eval("id") %>' CommandName="idArticulo"/><td />
                   </td> 
                 </tr>
@@ -48,27 +48,23 @@
     <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
-        <%
-            foreach(TPWinForm_equipo_21.Models.Articulo  arti in ListaArticulos)
-            {
-                %>
-
-           
-        <div class="col">
-            <div class="card">
-                <img src="..." class="card-img-top" alt="..">
-                <div class="card-body">
-                    <h5 class="card-title"><%:arti.nombre %></h5>
-                    <p class="card-text"><%:arti.descripcion %></p>
-                    <p class="card-text">Categoria: <%:arti.categoria %></p>
-                    <p class="card-text">Marca: <%:arti.marca %></p>
-                    <p class="card-text">Precio: <%:arti.precio %></p>
-                    <asp:Button ID="btnCarrito" Cssclass="btn btn-primary" runat="server" Text="Agregar al carrito🛒" OnClick="btnCarrito_Click" CommandArgument='<%#Eval("id") %>' CommandName="idArticulo"/>
-
+        <asp:Repeater ID="repeater2" runat="server">
+            <ItemTemplate>
+                <div class="col">
+                    <div class="card">
+                        <asp:Image ID="imgArticulo" runat="server" ImageUrl='<%# Eval("Imagen.imagenUrl") %>'/>
+                        <div class="card-body">
+                            <h5 class="card-title"><%# Eval("nombre") %></h5>
+                            <p class="card-text"><%# Eval("descripcion") %></p>
+                            <p class="card-text">Categoria:<%# Eval("categoria") %></p>
+                            <p class="card-text">Marca: <%# Eval("marca") %></p>
+                            <p class="card-text">Precio: <%# Eval("precio") %></p>
+                            <asp:Button ID="btnCarrito" runat="server" Text="🛒" OnClick="btnCarrito_Click" CommandArgument='<%#Eval("id") %>' CommandName="idArticulo"/><td />
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-   <%}%>
+            </ItemTemplate>
+    </asp:Repeater>
 </div>
 
 <script type="text/javascript">

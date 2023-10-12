@@ -15,6 +15,7 @@ namespace TPWinForm_equipo_21.Servicio
             AccesoDatos datos = new AccesoDatos();
             MarcaService marcaService = new MarcaService();
             CategoriaService categoriaService = new CategoriaService();
+            ImagenService imagenService = new ImagenService();
 
             try
             {
@@ -35,6 +36,7 @@ namespace TPWinForm_equipo_21.Servicio
                     articulo.categoria = new Categoria();
                     articulo.categoria.Descripcion = categoriaService.obtener(idCategoria);
                     articulo.precio = (decimal)datos.Lector["Precio"];
+                    articulo.Imagen = imagenService.listarUna(articulo.id);
                     lista.Add(articulo);
 
                 }

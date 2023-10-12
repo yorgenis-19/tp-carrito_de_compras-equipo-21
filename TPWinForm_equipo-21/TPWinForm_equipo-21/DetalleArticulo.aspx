@@ -2,6 +2,29 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+        <style>
+.carousel-inner .carousel-item img {
+    width: 30%;
+    height: auto;
+}
+
+/* Estilo para los botones "Previous" y "Next" */
+.carousel-control-prev, .carousel-control-next {
+    color: #000000; 
+}
+/* Estilo para los botones "Previous" y "Next" */
+.carousel-control-prev, .carousel-control-next {
+    background-color: #d6cdc1;
+    color: #ffffff;
+    font-size: 24px; 
+    width: auto; 
+}
+
+/* Estilo para los íconos de los botones "Previous" y "Next" */
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    color: #ffffff;
+}
+    </style>
 
        <h2> Detalle de producto</h2>
     <div>

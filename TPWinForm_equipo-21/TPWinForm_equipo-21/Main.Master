@@ -27,6 +27,9 @@
                                 <asp:Label ID="tamCarrito" runat="server" Text="0"></asp:Label>
 
                             </a>
+                            <a class="nav-link active" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                                Filtros
+                            </a>
                         </li>
                     </ul>
                 </div>

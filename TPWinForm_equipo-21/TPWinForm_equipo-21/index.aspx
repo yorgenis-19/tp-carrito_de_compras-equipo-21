@@ -14,6 +14,19 @@
         }
     </style>
 
+        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasRightLabel">Filtrado</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvasDark" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <asp:Label>ID PRODUCTO:</asp:Label>
+             <asp:TextBox runat="server" />
+             <asp:Label>MARCA:</asp:Label>
+             <asp:Label>PRECIO:</asp:Label>
+          </div>
+    </div>
+
 
 
     <asp:Label ID="Label1" runat="server" Text=" "></asp:Label>

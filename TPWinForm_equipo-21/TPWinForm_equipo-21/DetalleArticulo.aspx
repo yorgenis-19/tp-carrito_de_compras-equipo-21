@@ -35,22 +35,22 @@
         <asp:Label ID="lblPrecioArticulo" runat="server" Text=""></asp:Label><br />
     </div>
 
-    <!-- Controles para mostrar las imágenes relacionadas al artículo -->
-   <div id="carouselExample" class="carousel slide" data-ride="carousel">
+       <!-- Controles para mostrar las imágenes relacionadas al artículo -->
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         <asp:Repeater ID="repeaterImagenes" runat="server">
             <ItemTemplate>
-                <div class='<%# Container.ItemIndex == 0 ? "carousel-item active" : "carousel-item" %>'>
+                <div class='carousel-item<%# (bool)Eval("IsFirst") ? " active" : "" %>'>
                     <asp:Image ID="imgArticulo" runat="server" ImageUrl='<%# Eval("imagenUrl") %>' CssClass="d-block w-100" alt="Imagen del artículo" />
                 </div>
             </ItemTemplate>
         </asp:Repeater>
     </div>
-    <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+    <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
     </a>
-    <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+    <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </a>

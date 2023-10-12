@@ -25,7 +25,6 @@ namespace TPWinForm_equipo_21
                 }
                 return idArticulo;
             }
-
             if (!IsPostBack)
             {
                 int idArticulo = ObtenerElIdDelArticuloDesdeLaURL();
@@ -46,6 +45,12 @@ namespace TPWinForm_equipo_21
                         lblCategoriaArticulo.Text = articulo.categoria.Descripcion;
                         lblMarcaArticulo.Text = articulo.marca.Descripcion;
                         lblPrecioArticulo.Text = articulo.precio.ToString();
+                    }
+
+                    // Establece la primera imagen como activa
+                    if (imagenesRelacionadas.Count > 0)
+                    {
+                        imagenesRelacionadas[0].IsFirst = true;
                     }
 
                     // Vincula el Repeater con las imágenes relacionadas

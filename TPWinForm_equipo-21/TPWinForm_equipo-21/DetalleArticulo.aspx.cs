@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using TPWinForm_equipo_21.Models;
+using TPWinForm_equipo_21.Servicio;
 
 namespace TPWinForm_equipo_21
 {
@@ -11,6 +13,47 @@ namespace TPWinForm_equipo_21
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            int ObtenerElIdDelArticuloDesdeLaURL()
+            {
+                int idArticulo = 0;
+                if (Request.QueryString["id"] != null)
+                {
+                    if (int.TryParse(Request.QueryString["id"], out idArticulo))
+                    {
+                        // ID válido en la URL.
+                    }
+                }
+                return idArticulo;
+            }
+
+            if (!IsPostBack)
+            {
+                int idArticulo = ObtenerElIdDelArticuloDesdeLaURL();
+
+                if (idArticulo > 0)
+                {
+                    ImagenService imagenService = new ImagenService();
+                    ArticuloService articuloService = new ArticuloService();
+
+                    List<Imagen> imagenesRelacionadas = imagenService.listar(idArticulo);
+                    Articulo articulo = articuloService.buscarPorId(idArticulo);
+
+                    if (articulo != null)
+                    {
+                        // Vincula los controles de la página con los valores del artículo
+                        lblNombreArticulo.Text = articulo.nombre;
+                        lblDescripcionArticulo.Text = articulo.descripcion;
+                        lblCategoriaArticulo.Text = articulo.categoria.Descripcion;
+                        lblMarcaArticulo.Text = articulo.marca.Descripcion;
+                        lblPrecioArticulo.Text = articulo.precio.ToString();
+                    }
+
+                    // Vincula el Repeater con las imágenes relacionadas
+                    repeaterImagenes.DataSource = imagenesRelacionadas;
+                    repeaterImagenes.DataBind();
+                }
+
+            }
 
         }
     }

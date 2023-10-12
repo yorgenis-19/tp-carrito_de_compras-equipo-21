@@ -19,7 +19,7 @@ namespace TPWinForm_equipo_21.Servicio
 
             try
             {
-                datos.setearConsulta("select * from articulos");
+                datos.setearConsulta("SELECT * FROM ARTICULOS");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())

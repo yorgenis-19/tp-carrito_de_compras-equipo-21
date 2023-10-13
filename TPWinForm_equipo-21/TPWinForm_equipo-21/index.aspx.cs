@@ -11,9 +11,14 @@ namespace TPWinForm_equipo_21
 {
     public partial class index : System.Web.UI.Page
     {
-        ArticuloService articuloService = new ArticuloService();
+        private ArticuloService articuloService = new ArticuloService();
         public List<Articulo> articulos = new List<Articulo>();
         public List<Articulo> ListaArticulos { get; set; }
+
+        private MarcaService marcaService = new MarcaService();
+        private List<Marca> marcas = new List<Marca>();
+        private CategoriaService categoriaService = new CategoriaService();
+        private List<Categoria> categorias = new List<Categoria>();
         protected void Page_Load(object sender, EventArgs e)
         {
             ListaArticulos = articuloService.listar();
@@ -23,11 +28,22 @@ namespace TPWinForm_equipo_21
                 Session.Add("Carrito", carrito);
             }
             articulos = articuloService.listar();
-
+            marcas = marcaService.listar();
+            categorias = categoriaService.listar();
             if (!IsPostBack)
             {
                 repeater2.DataSource = articulos;
                 repeater2.DataBind();
+
+                foreach (var marca in marcas)
+                {
+                    ddlMarca.Items.Add(marca.Descripcion);
+                }
+
+                foreach (var categoria in categorias)
+                {
+                    ddlCategoria.Items.Add(categoria.ToString());
+                }
 
             }
 

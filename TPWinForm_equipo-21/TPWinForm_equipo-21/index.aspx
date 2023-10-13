@@ -20,12 +20,26 @@
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvasDark" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
-            <asp:Label>ID PRODUCTO:</asp:Label>
-             <asp:TextBox runat="server" />
-             <asp:Label>MARCA:</asp:Label>
-             <asp:Label>PRECIO:</asp:Label>
+              <div class="producto">
+                  <label>ID PRODUCTO:</label>
+                  <asp:TextBox runat="server" Text="" />
+              </div>
+              <div class="precio">
+                <label>PRECIO:</label>
+              </div>
+              <div class="marca">
+                  <label>MARCA:</label>
+                  <asp:DropDownList ID="ddlMarca" runat="server"></asp:DropDownList>
+              </div>
+              <div class="categoria">
+                  <label>CATEGORIA:</label>
+                  <asp:DropDownList ID="ddlCategoria" runat="server"></asp:DropDownList>
+              </div>
+            
+             
+              <asp:Button ID="BtnFilters" runat="server" Text="Aplicar Filtros" CssClass="btn btn-primary" OnClick="BtnFilters_Click"/>
           </div>
-    </div>
+    </div>  
 
 
 

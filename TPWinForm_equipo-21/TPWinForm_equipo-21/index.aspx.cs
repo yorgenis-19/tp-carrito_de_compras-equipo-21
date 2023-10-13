@@ -27,19 +27,21 @@ namespace TPWinForm_equipo_21
                 List<Articulo> carrito = new List<Articulo>();
                 Session.Add("Carrito", carrito);
             }
-            articulos = articuloService.listar();
-            marcas = marcaService.listar();
-            categorias = categoriaService.listar();
             if (!IsPostBack)
             {
+                articulos = articuloService.listar();
+                marcas = marcaService.listar();
+                categorias = categoriaService.listar();
+
                 repeater2.DataSource = articulos;
                 repeater2.DataBind();
 
+                ddlMarca.Items.Add("");
                 foreach (var marca in marcas)
                 {
                     ddlMarca.Items.Add(marca.Descripcion);
                 }
-
+                ddlCategoria.Items.Add("");
                 foreach (var categoria in categorias)
                 {
                     ddlCategoria.Items.Add(categoria.ToString());
@@ -102,6 +104,17 @@ namespace TPWinForm_equipo_21
             }
 
 
+        }
+
+        protected void BtnFilters_Click(object sender, EventArgs e)
+        {
+            string marca = ddlMarca.Text;
+            string categoria = ddlCategoria.Text;
+
+            articulos.Clear();
+            articulos = articuloService.listarFiltros(marca, categoria);
+            repeater2.DataSource = articulos;
+            repeater2.DataBind();
         }
     }
 }

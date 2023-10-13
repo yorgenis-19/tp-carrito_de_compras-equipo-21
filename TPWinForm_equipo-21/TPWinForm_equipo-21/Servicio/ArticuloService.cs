@@ -52,6 +52,51 @@ namespace TPWinForm_equipo_21.Servicio
                 datos.cerrarConexion();
             }
         }
+
+        public List<Articulo> listarFiltros(string marca, string categoria)
+        {
+            List<Articulo> lista = new List<Articulo>();
+            AccesoDatos datos = new AccesoDatos();
+            MarcaService marcaService = new MarcaService();
+            CategoriaService categoriaService = new CategoriaService();
+            ImagenService imagenService = new ImagenService();
+
+            try
+            {
+                datos.setearConsulta("SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.IdMarca, M.Descripcion as Marca, A.IdCategoria, C.Descripcion as Categoria, A.Precio FROM ARTICULOS as A LEFT JOIN MARCAS as M ON M.Id = A.IdMarca LEFT JOIN CATEGORIAS as C ON C.Id = A.IdCategoria WHERE M.Descripcion LIKE '%' + @marca + '%' AND C.Descripcion LIKE '%' + @categoria + '%' ORDER BY A.ID ASC"); datos.setearParametro("@marca", marca);
+                datos.setearParametro("@categoria", categoria);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Articulo articulo = new Articulo();
+                    articulo.id = (int)datos.Lector["Id"];
+                    articulo.codigo = (string)datos.Lector["Codigo"];
+                    articulo.nombre = (string)datos.Lector["Nombre"];
+                    articulo.descripcion = (string)datos.Lector["Descripcion"];
+                    articulo.marca = new Marca();
+                    articulo.marca.Id = (int)datos.Lector["IdMarca"];
+                    articulo.marca.Descripcion = (string)datos.Lector["Marca"];
+                    articulo.categoria = new Categoria();
+                    articulo.categoria.Id = (int)datos.Lector["IdCategoria"];
+                    articulo.categoria.Descripcion = (string)datos.Lector["Categoria"];
+                    articulo.precio = (decimal)datos.Lector["Precio"];
+                    articulo.Imagen = imagenService.listarUna(articulo.id);
+                    lista.Add(articulo);
+
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public void agregar(Articulo nuevo)
         {
             AccesoDatos datos = new AccesoDatos();

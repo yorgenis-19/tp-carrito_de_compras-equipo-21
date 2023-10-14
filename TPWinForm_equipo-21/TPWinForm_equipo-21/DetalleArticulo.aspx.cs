@@ -25,6 +25,13 @@ namespace TPWinForm_equipo_21
                 }
                 return idArticulo;
             }
+
+            if (Session["Carrito"] == null)
+            {
+                List<Articulo> carrito = new List<Articulo>();
+                Session.Add("Carrito", carrito);
+            }
+
             if (!IsPostBack)
             {
                 int idArticulo = ObtenerElIdDelArticuloDesdeLaURL();

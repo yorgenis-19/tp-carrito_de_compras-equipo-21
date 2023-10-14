@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services.Description;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TPWinForm_equipo_21.Models;
@@ -110,11 +111,18 @@ namespace TPWinForm_equipo_21
         {
             string marca = ddlMarca.Text;
             string categoria = ddlCategoria.Text;
+            decimal precio = decimal.Parse(ddlPrecio.Text);
 
             articulos.Clear();
-            articulos = articuloService.listarFiltros(marca, categoria);
+            articulos = articuloService.listarFiltros(marca, categoria, precio);
             repeater2.DataSource = articulos;
             repeater2.DataBind();
+        }
+        protected void BtnSacarFiltros_Click(object sender, EventArgs e)
+        {
+            ddlMarca.SelectedIndex = 0;
+            ddlCategoria.SelectedIndex = 0;
+            ddlCategoria.Text = "";
         }
     }
 }

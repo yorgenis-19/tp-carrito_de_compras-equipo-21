@@ -59,6 +59,18 @@ namespace TPWinForm_equipo_21
                 }
 
             }
+            void updateContador()
+            {
+                Label tamCarrito = Master.FindControl("tamCarrito") as Label;
+                if (tamCarrito != null)
+                {
+                    List<Articulo> carrito = new List<Articulo>();
+                    carrito = (List<Articulo>)Session["Carrito"];
+                    tamCarrito.Text = carrito.Count.ToString();
+                }
+            }
+
+            updateContador();
 
         }
     }

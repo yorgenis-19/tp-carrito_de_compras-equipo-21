@@ -67,7 +67,8 @@ namespace TPWinForm_equipo_21.Servicio
                      "FROM ARTICULOS as A " +
                      "LEFT JOIN MARCAS as M ON M.Id = A.IdMarca " +
                      "LEFT JOIN CATEGORIAS as C ON C.Id = A.IdCategoria " +
-                     "WHERE M.Descripcion LIKE '%' + @marca + '%' " +
+                     "WHERE (A.Nombre LIKE '%' + @nombre + '%') OR (A.Descripcion LIKE '%' + @nombre + '%') OR (A.Codigo LIKE '%' + @nombre + '%')" +
+                     "AND M.Descripcion LIKE '%' + @marca + '%' " +
                      "AND C.Descripcion LIKE '%' + @categoria + '%' " +
                      "AND ((@esMayor = 1 AND A.Precio > @precio) OR (@esMayor = 0 AND A.Precio <= @precio) OR (@esMayor = 2)) " +
                      "ORDER BY A.Id ASC");
@@ -75,6 +76,7 @@ namespace TPWinForm_equipo_21.Servicio
                 datos.setearParametro("@categoria", categoria);
                 datos.setearParametro("@precio", precio);
                 datos.setearParametro("@esMayor", filtroprecio);
+                datos.setearParametro("@nombre", nombre);
 
                 System.Diagnostics.Debug.WriteLine(datos.getConsulta());
 

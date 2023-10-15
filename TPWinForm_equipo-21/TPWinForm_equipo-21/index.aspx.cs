@@ -120,6 +120,9 @@ namespace TPWinForm_equipo_21
             decimal precio = string.IsNullOrEmpty(txtPrecio.Text) ? (Decimal)0 : decimal.Parse(txtPrecio.Text);
             string filtroPrecio = ddlPrecio.Text;
 
+            if (string.IsNullOrEmpty(marca) || string.IsNullOrEmpty(categoria) || !decimal.TryParse(txtPrecio.Text, out precio)){
+                Console.WriteLine("Por favor, complete todos los campos y asegúrese de que el precio sea un número válido.");
+            }
 
 
             articulos.Clear();

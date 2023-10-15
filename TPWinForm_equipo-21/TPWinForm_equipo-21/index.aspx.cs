@@ -196,8 +196,33 @@ namespace TPWinForm_equipo_21
             ddlCategoria.Text = "";
             ddlPrecio.SelectedIndex = 0;
             txtPrecio.Text = "0";
+            txtNombre.Text = "";
 
             articulos = articuloService.listar();
+
+            foreach (var articulo in articulos)
+            {
+                if (articulo.Imagen == null || articulo.Imagen.imagenUrl == null || !EvaluarEstadoDelEnlace(articulo.Imagen.imagenUrl))
+                {
+                    List<Imagen> imagenes = new List<Imagen>();
+                    imagenes = imagenService.listar(articulo.id);
+                    bool imgCargada = false;
+                    foreach (var imagen in imagenes)
+                    {
+                        if (EvaluarEstadoDelEnlace(imagen.imagenUrl))
+                        {
+                            articulo.Imagen.imagenUrl = imagen.imagenUrl;
+                            articulo.Imagen.id = imagen.id;
+                            imgCargada = true;
+                            break;
+                        }
+                    }
+                    if (!imgCargada)
+                    {
+                        articulo.Imagen.imagenUrl = "https://imgs.search.brave.com/bVggFXOuk9Uz6x__RJgvWLVRssSROI43dGl9LPdnzrU/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4u/c2hvcGlmeS5jb20v/cy9maWxlcy8xLzA1/MzMvMjA4OS9maWxl/cy9wbGFjZWhvbGRl/ci1pbWFnZXMtaW1h/Z2VfbGFyZ2UucG5n/P2Zvcm1hdD1qcGcm/cXVhbGl0eT05MCZ2/PTE1MzAxMjkwODE";
+                    }
+                }
+            }
 
             repeater2.DataSource = articulos;
             repeater2.DataBind();

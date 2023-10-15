@@ -130,7 +130,7 @@ namespace TPWinForm_equipo_21
                     {
                         Imagen imagen = new Imagen();
                         imagen.IsFirst = true;
-                        imagen.imagenUrl = "https://imgs.search.brave.com/0oCZxqkAadvXNQ6A93IxIM0b_P3atildQNyrjMG7aL0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9zdC5k/ZXBvc2l0cGhvdG9z/LmNvbS8xMDA2ODk5/LzQ5OTAvaS82MDAv/ZGVwb3NpdHBob3Rv/c180OTkwMDY2MS1z/dG9jay1waG90by00/MDQtZXJyb3ItcGFn/ZS1ub3QtZm91bmQu/anBn";
+                        imagen.imagenUrl = "https://imgs.search.brave.com/bVggFXOuk9Uz6x__RJgvWLVRssSROI43dGl9LPdnzrU/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4u/c2hvcGlmeS5jb20v/cy9maWxlcy8xLzA1/MzMvMjA4OS9maWxl/cy9wbGFjZWhvbGRl/ci1pbWFnZXMtaW1h/Z2VfbGFyZ2UucG5n/P2Zvcm1hdD1qcGcm/cXVhbGl0eT05MCZ2/PTE1MzAxMjkwODE";
                         imagenesValidadas.Add(imagen);
                     }
 

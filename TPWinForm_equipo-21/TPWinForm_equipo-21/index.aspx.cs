@@ -47,7 +47,12 @@ namespace TPWinForm_equipo_21
                 {
                     ddlCategoria.Items.Add(categoria.ToString());
                 }
-
+                
+                ddlPrecio.Items.Clear();
+                // lista de filtro x precio
+                ddlPrecio.Items.Add(new ListItem("Mayor a", "1"));
+                ddlPrecio.Items.Add(new ListItem("Menor a", "0"));
+                ddlPrecio.Items.FindByValue("1").Selected = true;
             }
 
 
@@ -106,23 +111,31 @@ namespace TPWinForm_equipo_21
 
 
         }
-
-        protected void BtnFilters_Click(object sender, EventArgs e)
+        protected void BtnFilters_Click(object sender,EventArgs e)
         {
             string marca = ddlMarca.Text;
             string categoria = ddlCategoria.Text;
-            decimal precio = decimal.Parse(ddlPrecio.Text);
+            decimal precio = decimal.Parse(txtPrecio.Text);
+            bool filtroPrecio = ddlPrecio.SelectedValue == "1" ? true:false;
+
+            if (string.IsNullOrEmpty(marca) || string.IsNullOrEmpty(categoria) || !decimal.TryParse(txtPrecio.Text, out precio))
+            {
+                Console.WriteLine("Por favor, complete todos los campos y asegúrese de que el precio sea un número válido.");
+            }
+
 
             articulos.Clear();
-            articulos = articuloService.listarFiltros(marca, categoria, precio);
+            articulos = articuloService.listarFiltros(marca, categoria, filtroPrecio, precio);
             repeater2.DataSource = articulos;
             repeater2.DataBind();
         }
-        protected void BtnSacarFiltros_Click(object sender, EventArgs e)
+        protected void BtnSacarFiltros_Click(object sender,EventArgs e)
         {
             ddlMarca.SelectedIndex = 0;
             ddlCategoria.SelectedIndex = 0;
             ddlCategoria.Text = "";
+            ddlPrecio.SelectedIndex = 0;
+            txtPrecio.Text = "0";
         }
     }
 }

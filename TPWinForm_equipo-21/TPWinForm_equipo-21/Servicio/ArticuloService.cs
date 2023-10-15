@@ -53,7 +53,7 @@ namespace TPWinForm_equipo_21.Servicio
             }
         }
 
-        public List<Articulo> listarFiltros(string marca, string categoria, decimal precio)
+        public List<Articulo> listarFiltros(string marca, string categoria, bool filtroprecio, decimal precio)
         {
             List<Articulo> lista = new List<Articulo>();
             AccesoDatos datos = new AccesoDatos();
@@ -63,10 +63,18 @@ namespace TPWinForm_equipo_21.Servicio
 
             try
             {
-                datos.setearConsulta("SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.IdMarca, M.Descripcion as Marca, A.IdCategoria, C.Descripcion as Categoria, A.Precio FROM ARTICULOS as A LEFT JOIN MARCAS as M ON M.Id = A.IdMarca LEFT JOIN CATEGORIAS as C ON C.Id = A.IdCategoria WHERE M.Descripcion LIKE '%' + @marca + '%' AND C.Descripcion LIKE '%' + @categoria + '%' ORDER BY A.ID ASC"); datos.setearParametro("@marca", marca);
+                datos.setearConsulta("SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.IdMarca, M.Descripcion as Marca, A.IdCategoria, C.Descripcion as Categoria, A.Precio " +
+                     "FROM ARTICULOS as A " +
+                     "LEFT JOIN MARCAS as M ON M.Id = A.IdMarca " +
+                     "LEFT JOIN CATEGORIAS as C ON C.Id = A.IdCategoria " +
+                     "WHERE M.Descripcion LIKE '%' + @marca + '%' " +
+                     "AND C.Descripcion LIKE '%' + @categoria + '%' " +
+                     "AND (@esMayor = 1 AND A.Precio > @precio OR @esMayor = 0 AND A.Precio <= @precio) " +
+                     "ORDER BY A.Id ASC");
                 datos.setearParametro("@marca", marca);
                 datos.setearParametro("@categoria", categoria);
                 datos.setearParametro("@precio", precio);
+                datos.setearParametro("@esMayor", filtroprecio);
 
                 datos.ejecutarLectura();
 

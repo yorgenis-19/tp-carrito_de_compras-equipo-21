@@ -15,6 +15,12 @@
         .card-text.clase2:hover{
             transform: scale(1.2); 
         }
+        .botonCarrito::after {
+            content: none; 
+        }
+        .botonCarrito::before {
+            content: none; 
+        }
         
     </style>
     <!--Filtro lateral derecho-->
@@ -26,7 +32,7 @@
         <div class="offcanvas-body">
 
             <div class="containerbody" style="display:flex; flex-direction:column; justify-content: space-between; height: 100%;">
-                <div class="apartado-superior">
+                <div class="apartado-superior" style="height: 45%;display: flex;flex-direction: column;justify-content: space-evenly;">
                     <div class="marca" style="display:flex; flex-direction:column;">
                         <label>MARCA:</label>
                         <asp:DropDownList ID="ddlMarca" runat="server"></asp:DropDownList>
@@ -35,9 +41,13 @@
                         <label>CATEGORIA:</label>
                         <asp:DropDownList ID="ddlCategoria" runat="server"></asp:DropDownList>
                     </div>
+                    <div class="categoria" style="display:flex; flex-direction:column;">
+                        <label>Filtrar por precio:</label>
+                        <asp:DropDownList ID="ddlPrecio" runat="server"></asp:DropDownList>
+                    </div>
                     <div class="precio" style="display:flex; flex-direction:column;">
-                        <label>PRECIO:</label>
-                        <asp:TextBox ID="ddlPrecio" runat="server">0</asp:TextBox>
+                        <label>PRECIO BUSCADO:</label>
+                        <asp:TextBox ID="txtPrecio" runat="server">0</asp:TextBox>
                     </div>
                 </div>
                 <div class="apartado-inferior" style="display:flex; flex-direction:column">
@@ -66,7 +76,7 @@
             <asp:Repeater ID="repeater2" runat="server">
                 <ItemTemplate>
                     <div class="col" style="margin-bottom: 30px;">
-                        <div class="card" style="--bs-border-width: 3px; --bs-card-bg: #506a7b; color: #ffffff;">
+                        <div class="card" style="--bs-border-width: 3px; --bs-card-bg: #204d6b; color: #ffffff;">
                             <div style="display: flex;justify-content: center;">
                                 <asp:Image ID="imgArticulo" runat="server" ImageUrl='<%# Eval("Imagen.imagenUrl") %>'/>
                             </div>
@@ -80,7 +90,10 @@
                                 <hr />
                                 <div style="display: flex;justify-content: space-evenly;">
                                     <a class="card-text clase2" style="text-decoration: none;color: ghostwhite; transition: transform 0.3s;" href="DetalleArticulo.aspx?id=<%# Eval("id") %>">Ver Detalle</a>
-                                    <asp:Button ID="btnCarrito" runat="server" Text="Agregar al carrito 🛒" OnClick="btnCarrito_Click" CommandArgument='<%#Eval("id") %>' CommandName="idArticulo" CssClass="card-text"/>
+                                    <div class="botonCarrito">
+                                        <asp:Button ID="btnCarrito" runat="server" Text="Agregar al carrito 🛒" OnClick="btnCarrito_Click" CommandArgument='<%#Eval("id") %>' CommandName="idArticulo" CssClass="card-text"/>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>

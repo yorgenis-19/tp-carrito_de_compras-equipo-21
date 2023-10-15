@@ -63,7 +63,7 @@
             </div>
         </div>
         <!-- Carrusel de imágenes (segunda mitad) -->
-        <div class="col-md-6">
+        <div class="col-md-6" style="height:60vh;">
             <div id="carouselExample" class="carousel slide" style="height: 100%;" data-bs-ride="carousel">
                 <div class="carousel-inner" style="height: 100%;">
                     <asp:Repeater ID="repeaterImagenes" runat="server" >

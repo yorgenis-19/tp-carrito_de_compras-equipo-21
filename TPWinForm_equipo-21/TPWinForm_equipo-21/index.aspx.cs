@@ -179,7 +179,6 @@ namespace TPWinForm_equipo_21
                 Console.WriteLine("Por favor, complete todos los campos y asegúrese de que el precio sea un número válido.");
             }
 
-
             articulos.Clear();
             articulos = articuloService.listarFiltros(marca, categoria, filtroPrecio, precio);
             repeater2.DataSource = articulos;

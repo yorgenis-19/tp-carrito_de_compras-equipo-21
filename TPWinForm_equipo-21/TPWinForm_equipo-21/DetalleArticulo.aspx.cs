@@ -176,6 +176,7 @@ namespace TPWinForm_equipo_21
             if (!estaEnCarrito(articulo))
             {
                 Label1.Text = articulo.nombre + " añadido al carrito";
+                Label1.CssClass = "alert alert-success";
                 List<Articulo> carrito = new List<Articulo>();
                 carrito = (List<Articulo>)Session["Carrito"];
                 carrito.Add(articulo);
@@ -184,6 +185,7 @@ namespace TPWinForm_equipo_21
             else
             {
                 Label1.Text = articulo.nombre + " ya añadido en carrito";
+                Label1.CssClass = "alert alert-danger";
             }
 
 

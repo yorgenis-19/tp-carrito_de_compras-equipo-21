@@ -30,6 +30,7 @@
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
+            <asp:Label ID="Label2" runat="server" Text=" "></asp:Label>
 
             <div class="containerbody" style="display:flex; flex-direction:column; justify-content: space-between; height: 100%;">
                 <div class="apartado-superior" style="height: 45%;display: flex;flex-direction: column;justify-content: space-evenly;">
@@ -48,6 +49,10 @@
                     <div class="precio" style="display:flex; flex-direction:column;">
                         <label>PRECIO BUSCADO:</label>
                         <asp:TextBox ID="txtPrecio" runat="server">0</asp:TextBox>
+                    </div>
+                    <div class="nombre"style="display:flex; flex-direction:column;">
+                        <label>NOMBRE PRODUCTO:</label>
+                        <asp:TextBox runat="server" ID="txtNombre" />
                     </div>
                 </div>
                 <div class="apartado-inferior" style="display:flex; flex-direction:column">
@@ -68,8 +73,10 @@
         </div>
     </div>
 
-
-    <asp:Label ID="Label1" runat="server" Text=" "></asp:Label>
+    <div class="alertita" id="alertita" style="display: flex; justify-content: flex-start;">
+        <asp:Label ID="Label1" runat="server" Text=" "></asp:Label>
+    </div>
+    
 
     <!--Filas y columnas de cards (container)-->
     <div class="row row-cols-1 row-cols-md-3 g-4">

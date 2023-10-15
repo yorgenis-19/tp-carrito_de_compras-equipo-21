@@ -53,7 +53,7 @@ namespace TPWinForm_equipo_21.Servicio
             }
         }
 
-        public List<Articulo> listarFiltros(string marca, string categoria, string filtroprecio, decimal precio)
+        public List<Articulo> listarFiltros(string marca, string categoria, string filtroprecio, decimal precio, string nombre)
         {
             List<Articulo> lista = new List<Articulo>();
             AccesoDatos datos = new AccesoDatos();

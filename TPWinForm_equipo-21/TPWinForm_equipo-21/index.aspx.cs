@@ -155,6 +155,7 @@ namespace TPWinForm_equipo_21
             articulo = articuloService.buscarPorId(id);
             if (!estaEnCarrito(articulo)){
                 Label1.Text = articulo.nombre + " añadido al carrito";
+                Label1.CssClass = "alert alert-success";
                 List<Articulo> carrito = new List<Articulo>();
                 carrito = (List<Articulo>)Session["Carrito"];
                 carrito.Add(articulo);
@@ -163,6 +164,7 @@ namespace TPWinForm_equipo_21
             else
             {
                 Label1.Text = articulo.nombre + " ya añadido en carrito";
+                Label1.CssClass = "alert alert-danger";
             }
 
 
@@ -174,13 +176,16 @@ namespace TPWinForm_equipo_21
             string categoria = ddlCategoria.Text;
             decimal precio = string.IsNullOrEmpty(txtPrecio.Text) ? (Decimal)0 : decimal.Parse(txtPrecio.Text);
             string filtroPrecio = ddlPrecio.Text;
+            string nombre = txtNombre.Text;
 
-            if (string.IsNullOrEmpty(marca) || string.IsNullOrEmpty(categoria) || !decimal.TryParse(txtPrecio.Text, out precio)){
-                Console.WriteLine("Por favor, complete todos los campos y asegúrese de que el precio sea un número válido.");
+            if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(marca) || string.IsNullOrEmpty(categoria) || !decimal.TryParse(txtPrecio.Text, out precio)){
+                Console.WriteLine("Por favor, completar TODOS los campos.");
+                //Label2.Text = "Por favor, completar TODOS los campos.";  //comentado porque no se remueve al momento de hacer click en el boton filters
+                //Label2.CssClass = "alert alert-danger";   
             }
 
             articulos.Clear();
-            articulos = articuloService.listarFiltros(marca, categoria, filtroPrecio, precio);
+            articulos = articuloService.listarFiltros(marca, categoria, filtroPrecio, precio, nombre);
             repeater2.DataSource = articulos;
             repeater2.DataBind();
         }

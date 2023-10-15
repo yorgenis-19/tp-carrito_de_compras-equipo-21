@@ -33,9 +33,11 @@
                             <h4>Carrito <asp:Label ID="tamCarrito" runat="server" Text="0"></asp:Label></h4>
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link active" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                            <h4 style="margin-left: 50px;">Filtros</h4>
+                            <h4 style="margin-left: 50px;">
+                                <asp:Label ID="filtros" runat="server" Text="Filtros"></asp:Label></h4>
                         </a>
                     </li>
                 </ul>

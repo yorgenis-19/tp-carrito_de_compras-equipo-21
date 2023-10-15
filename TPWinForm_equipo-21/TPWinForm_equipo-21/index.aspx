@@ -76,7 +76,7 @@
             <asp:Repeater ID="repeater2" runat="server">
                 <ItemTemplate>
                     <div class="col" style="margin-bottom: 30px;">
-                        <div class="card" style="--bs-border-width: 3px; --bs-card-bg: #204d6b; color: #ffffff;">
+                        <div class="card" style="--bs-border-width: 3px; --bs-card-bg: #5A538E; color: #ffffff;">
                             <div style="display: flex;justify-content: center;">
                                 <asp:Image ID="imgArticulo" runat="server" ImageUrl='<%# Eval("Imagen.imagenUrl") %>'/>
                             </div>

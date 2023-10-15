@@ -15,7 +15,7 @@
     <form id="form1" runat="server">
 
     <!--Menu superior-->
-    <nav class="navbar navbar-expand-lg bg-dark-subtle" style="margin-bottom: 50px;background-color: #8dd55e!important;">
+    <nav class="navbar navbar-expand-lg bg-dark-subtle" style="margin-bottom: 50px;background-color: #e5e5afa!important;">
         <div class="container-fluid">
             <!--Imagen svg con carrito redirige a index-->
             <a class="navbar-brand" href="index.aspx">

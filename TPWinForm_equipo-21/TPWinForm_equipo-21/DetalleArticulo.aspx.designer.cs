@@ -69,15 +69,6 @@ namespace TPWinForm_equipo_21
         protected global::System.Web.UI.WebControls.Label lblPrecioArticulo;
 
         /// <summary>
-        /// Control lblPrecioArticuloValue.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPrecioArticuloValue;
-
-        /// <summary>
         /// Control btnCarrito.
         /// </summary>
         /// <remarks>

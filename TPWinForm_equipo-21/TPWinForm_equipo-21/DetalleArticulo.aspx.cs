@@ -42,6 +42,38 @@ namespace TPWinForm_equipo_21
         }
 
 
+        public bool EvaluarEstadoDelEnlace(string url)
+        {
+            try
+            {
+                // Crea una instancia de HttpWebRequest para la URL proporcionada.
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+
+                // Evitar la redirección automática.
+                request.AllowAutoRedirect = false;
+
+                // Realiza la solicitud GET.
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    // Verifica el estado de la respuesta.
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        Console.WriteLine("El enlace está activo y responde correctamente.");
+                        return true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("El enlace no está disponible. Código de estado: " + response.StatusCode);
+                        return false;
+                    }
+                }
+            }
+            catch (WebException ex)
+            {
+                Console.WriteLine("Error al realizar la solicitud: " + ex.Message);
+                return false;
+            }
+        }
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -81,18 +113,35 @@ namespace TPWinForm_equipo_21
 
                     ImagenService imagenService = new ImagenService();
                     List<Imagen> imagenesRelacionadas = imagenService.listar(idArticulo);
-
-                    // Establece la primera imagen como activa si hay imágenes válidas
-                    if (imagenesRelacionadas.Count > 0)
+                    List<Imagen> imagenesValidadas = new List<Imagen>();
+                    foreach (var imagen in imagenesRelacionadas)
                     {
-                        imagenesRelacionadas[0].IsFirst = true;
+                        if (EvaluarEstadoDelEnlace(imagen.imagenUrl))
+                        {
+                            imagenesValidadas.Add(imagen);
+                        }
+
                     }
 
+
+                    // Establece la primera imagen como activa si hay imágenes válidas
+                    if (imagenesValidadas.Count > 0)
+                    {
+                        imagenesValidadas[0].IsFirst = true;
+                    }
+                    else
+                    {
+                        Imagen imagen = new Imagen();
+                        imagen.IsFirst = true;
+                        imagen.imagenUrl = "https://imgs.search.brave.com/0oCZxqkAadvXNQ6A93IxIM0b_P3atildQNyrjMG7aL0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9zdC5k/ZXBvc2l0cGhvdG9z/LmNvbS8xMDA2ODk5/LzQ5OTAvaS82MDAv/ZGVwb3NpdHBob3Rv/c180OTkwMDY2MS1z/dG9jay1waG90by00/MDQtZXJyb3ItcGFn/ZS1ub3QtZm91bmQu/anBn";
+                        imagenesValidadas.Add(imagen);
+                    }
+
+
+
                     // Vincula el Repeater con las imágenes relacionadas válidas
-                    repeaterImagenes.DataSource = imagenesRelacionadas;
+                    repeaterImagenes.DataSource = imagenesValidadas;
                     repeaterImagenes.DataBind();
-
-
 
                 }
 

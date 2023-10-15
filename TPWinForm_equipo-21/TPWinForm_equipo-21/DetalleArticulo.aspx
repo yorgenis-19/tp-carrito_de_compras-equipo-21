@@ -28,6 +28,8 @@
     </style>
 
 
+
+
     <asp:Label ID="Label1" runat="server" Text=" "></asp:Label>
 
 <div class="container mt-5">
@@ -36,12 +38,11 @@
         <div class="col-md-6">
             <h2>Detalle de producto</h2>
             <div>
-                <asp:Label ID="lblNombreArticulo" runat="server" Text="" CssClass="font-weight-bold"></asp:Label><br />
-                <asp:Label ID="lblDescripcionArticulo" runat="server" Text=""></asp:Label><br />
-                <asp:Label ID="lblCategoriaArticulo" runat="server" Text=""></asp:Label><br />
-                <asp:Label ID="lblMarcaArticulo" runat="server" Text=""></asp:Label><br />
-                <asp:Label ID="lblPrecioArticulo" runat="server" Text="Precio:"></asp:Label>
-                <asp:Label ID="lblPrecioArticuloValue" runat="server" Text="" CssClass="font-weight-bold"></asp:Label><br />
+                Nombre: <asp:Label ID="lblNombreArticulo" runat="server" Text="" CssClass="font-weight-bold"></asp:Label><br />
+                Descripcion: <asp:Label ID="lblDescripcionArticulo" runat="server" Text=""></asp:Label><br />
+                Categoria: <asp:Label ID="lblCategoriaArticulo" runat="server" Text=""></asp:Label><br />
+                Marca: <asp:Label ID="lblMarcaArticulo" runat="server" Text=""></asp:Label><br />
+                Precio: <asp:Label ID="lblPrecioArticulo" runat="server" Text="" CssClass="font-weight-bold"></asp:Label>
                 <div class="botonCarrito mt-3">
                     <asp:Button ID="btnCarrito" runat="server" Text="Agregar al carrito 🛒" OnClick="btnCarrito_Click" CssClass="btn btn-primary" />
                 </div>
@@ -54,7 +55,7 @@
                     <asp:Repeater ID="repeaterImagenes" runat="server" >
                         <ItemTemplate>
                             <div class='carousel-item<%# (bool)Eval("IsFirst") ? " active" : "" %>'>
-                                <asp:Image ID="imgArticulo" runat="server" ImageUrl='<%# Eval("imagenUrl") %>' CssClass="d-block w-100" alt="Imagen del artículo"  />
+                                <asp:Image ID="imgArticulo" runat="server" ImageUrl='<%# Eval("imagenUrl") %>' CssClass="d-block w-100 artImagen" alt="No se pudo cargar la imagen" />
                             </div>
                         </ItemTemplate>
                     </asp:Repeater>

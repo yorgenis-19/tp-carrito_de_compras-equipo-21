@@ -118,8 +118,7 @@ namespace TPWinForm_equipo_21
             decimal precio = decimal.Parse(txtPrecio.Text);
             bool filtroPrecio = ddlPrecio.SelectedValue == "1" ? true:false;
 
-            if (string.IsNullOrEmpty(marca) || string.IsNullOrEmpty(categoria) || !decimal.TryParse(txtPrecio.Text, out precio))
-            {
+            if (string.IsNullOrEmpty(marca) || string.IsNullOrEmpty(categoria) || !decimal.TryParse(txtPrecio.Text, out precio)){
                 Console.WriteLine("Por favor, complete todos los campos y asegúrese de que el precio sea un número válido.");
             }
 

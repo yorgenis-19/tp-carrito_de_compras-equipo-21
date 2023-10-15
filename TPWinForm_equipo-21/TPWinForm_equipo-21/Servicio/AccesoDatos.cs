@@ -27,6 +27,11 @@ namespace TPWinForm_equipo_21.Servicio
             comando.CommandText = consulta;
         }
 
+        public string getConsulta()
+        {
+            return comando.CommandText;
+        }
+
         public void ejecutarLectura()
         {
             comando.Connection = conexion;

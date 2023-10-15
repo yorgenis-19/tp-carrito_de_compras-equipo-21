@@ -50,9 +50,10 @@ namespace TPWinForm_equipo_21
                 
                 ddlPrecio.Items.Clear();
                 // lista de filtro x precio
+                ddlPrecio.Items.Add(new ListItem("", "2"));
                 ddlPrecio.Items.Add(new ListItem("Mayor a", "1"));
                 ddlPrecio.Items.Add(new ListItem("Menor a", "0"));
-                ddlPrecio.Items.FindByValue("1").Selected = true;
+                ddlPrecio.Items.FindByValue("2").Selected = true;
             }
 
 
@@ -113,15 +114,12 @@ namespace TPWinForm_equipo_21
         }
         protected void BtnFilters_Click(object sender,EventArgs e)
         {
+
             string marca = ddlMarca.Text;
             string categoria = ddlCategoria.Text;
-            decimal precio = decimal.Parse(txtPrecio.Text);
-            bool filtroPrecio = ddlPrecio.SelectedValue == "1" ? true:false;
+            decimal precio = string.IsNullOrEmpty(txtPrecio.Text) ? (Decimal)0 : decimal.Parse(txtPrecio.Text);
+            string filtroPrecio = ddlPrecio.Text;
 
-            if (string.IsNullOrEmpty(marca) || string.IsNullOrEmpty(categoria) || !decimal.TryParse(txtPrecio.Text, out precio))
-            {
-                Console.WriteLine("Por favor, complete todos los campos y asegúrese de que el precio sea un número válido.");
-            }
 
 
             articulos.Clear();
@@ -136,6 +134,11 @@ namespace TPWinForm_equipo_21
             ddlCategoria.Text = "";
             ddlPrecio.SelectedIndex = 0;
             txtPrecio.Text = "0";
+
+            articulos = articuloService.listar();
+
+            repeater2.DataSource = articulos;
+            repeater2.DataBind();
         }
     }
 }

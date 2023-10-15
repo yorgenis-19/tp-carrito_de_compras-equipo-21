@@ -58,19 +58,16 @@ namespace TPWinForm_equipo_21
                     // Verifica el estado de la respuesta.
                     if (response.StatusCode == HttpStatusCode.OK)
                     {
-                        Console.WriteLine("El enlace está activo y responde correctamente.");
                         return true;
                     }
                     else
                     {
-                        Console.WriteLine("El enlace no está disponible. Código de estado: " + response.StatusCode);
-                        return false;
+                       return false;
                     }
                 }
             }
             catch (WebException ex)
             {
-                Console.WriteLine("Error al realizar la solicitud: " + ex.Message);
                 return false;
             }
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Services.Description;
 using System.Web.UI;
@@ -20,6 +21,36 @@ namespace TPWinForm_equipo_21
         private List<Marca> marcas = new List<Marca>();
         private CategoriaService categoriaService = new CategoriaService();
         private List<Categoria> categorias = new List<Categoria>();
+        private ImagenService imagenService = new ImagenService();
+        public bool EvaluarEstadoDelEnlace(string url)
+        {
+            try
+            {
+                // Crea una instancia de HttpWebRequest para la URL proporcionada.
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+
+                // Evitar la redirección automática.
+                request.AllowAutoRedirect = false;
+
+                // Realiza la solicitud GET.
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    // Verifica el estado de la respuesta.
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (WebException ex)
+            {
+                return false;
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             ListaArticulos = articuloService.listar();
@@ -33,6 +64,30 @@ namespace TPWinForm_equipo_21
                 articulos = articuloService.listar();
                 marcas = marcaService.listar();
                 categorias = categoriaService.listar();
+
+                foreach (var articulo in articulos)
+                {
+                    if (articulo.Imagen == null || articulo.Imagen.imagenUrl == null || !EvaluarEstadoDelEnlace(articulo.Imagen.imagenUrl))
+                    {
+                        List<Imagen> imagenes = new List<Imagen>();
+                        imagenes = imagenService.listar(articulo.id);
+                        bool imgCargada = false;
+                        foreach (var imagen in imagenes)
+                        {
+                            if (EvaluarEstadoDelEnlace(imagen.imagenUrl))
+                            {
+                                articulo.Imagen.imagenUrl = imagen.imagenUrl;
+                                articulo.Imagen.id = imagen.id;
+                                imgCargada = true;
+                                break;
+                            }
+                        }
+                        if (!imgCargada)
+                        {
+                            articulo.Imagen.imagenUrl = "https://imgs.search.brave.com/0oCZxqkAadvXNQ6A93IxIM0b_P3atildQNyrjMG7aL0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9zdC5k/ZXBvc2l0cGhvdG9z/LmNvbS8xMDA2ODk5/LzQ5OTAvaS82MDAv/ZGVwb3NpdHBob3Rv/c180OTkwMDY2MS1z/dG9jay1waG90by00/MDQtZXJyb3ItcGFn/ZS1ub3QtZm91bmQu/anBn";
+                        }
+                    }
+                }
 
                 repeater2.DataSource = articulos;
                 repeater2.DataBind();

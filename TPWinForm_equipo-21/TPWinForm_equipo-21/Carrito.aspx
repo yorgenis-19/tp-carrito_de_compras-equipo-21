@@ -35,7 +35,7 @@
                         <td><%# Eval("marca") %></td>
                         <td><%# Eval("categoria") %></td>
                         <td><%# Eval("precio") %></td>
-                        <td><a href="DetalleArticulo.aspx?id<%# Eval("id") %>">Ver Detalle</a></td>
+                        <td><a href="DetalleArticulo.aspx?id=<%# Eval("id") %>">Ver Detalle</a></td>
                         <td><asp:Button ID="btnQuitar" runat="server" Text="X" OnClick="btnQuitar_Click" CommandArgument='<%#Eval("id") %>' CommandName="idArticulo"/></td> 
                     </tr>
                 </ItemTemplate>

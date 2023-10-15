@@ -249,7 +249,7 @@ namespace TPWinForm_equipo_21.Servicio
                     int idMarca = (int)reader["IdMarca"];
                     articulo.marca.Descripcion = marcaService.obtener(idMarca);
                     int idCategoria = (int)reader["IdCategoria"];
-                    articulo.categoria.Descripcion = marcaService.obtener(idCategoria);
+                    articulo.categoria.Descripcion = categoriaService.obtener(idCategoria);
                     articulo.precio = (decimal)reader["Precio"];
                     if (articulo.id == Id)
                     {

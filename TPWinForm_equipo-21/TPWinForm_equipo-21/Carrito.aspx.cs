@@ -75,7 +75,8 @@ namespace TPWinForm_equipo_21
             RemoveCarrito(articulo);
 
             cargarLista(carrito);
-
+            Label1.Text = articulo.nombre + " eliminado del carrito";
+            Label1.CssClass = "alert alert-danger";
             updateContador();
             updatePrecio(carrito);
         }

@@ -10,6 +10,10 @@
             Response.Redirect("index.aspx");
         }
         %>
+
+    <div class="alertita" id="alertita" style="display: flex; justify-content: flex-start;">
+            <asp:Label ID="Label1" runat="server" Text=" "></asp:Label>
+    </div>
     <table class="table table-bordered">
     <thead>
         <tr>

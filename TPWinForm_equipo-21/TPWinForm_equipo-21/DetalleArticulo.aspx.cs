@@ -76,6 +76,11 @@ namespace TPWinForm_equipo_21
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            if (Request.QueryString["id"] == null)
+            {
+                Response.Redirect("index.aspx");
+            }
+
 
             if (Session["Carrito"] == null)
             {
@@ -103,7 +108,10 @@ namespace TPWinForm_equipo_21
                     }
 
 
-
+                    if (estaEnCarrito(articulo))
+                    {
+                        btnCarrito.Text = "Quitar del Carrito X";
+                    }
 
 
 
@@ -164,6 +172,21 @@ namespace TPWinForm_equipo_21
             return false;
         }
 
+        private void RemoveCarrito(Articulo articulo)
+        {
+            List<Articulo> carrito = new List<Articulo>();
+            carrito = (List<Articulo>)Session["Carrito"];
+
+            for (int i = 0; i < carrito.Count; i++)
+            {
+                if (carrito[i].id == articulo.id)
+                {
+                    carrito.RemoveAt(i);
+                    return;
+                }
+            }
+        }
+
 
         protected void btnCarrito_Click(object sender, EventArgs e)
         {
@@ -180,14 +203,21 @@ namespace TPWinForm_equipo_21
                 List<Articulo> carrito = new List<Articulo>();
                 carrito = (List<Articulo>)Session["Carrito"];
                 carrito.Add(articulo);
-                updateContador();
+                btnCarrito.Text = "Quitar del carrito X";
+                btnCarrito.CssClass = "btn btn-danger";
             }
             else
             {
-                Label1.Text = articulo.nombre + " ya añadido en carrito";
+                List<Articulo> carrito = new List<Articulo>();
+                carrito = (List<Articulo>)Session["Carrito"];
+                RemoveCarrito(articulo);
+                Label1.Text = articulo.nombre + " eliminado del carrito";
                 Label1.CssClass = "alert alert-danger";
+                btnCarrito.Text = "Agregar al carrito 🛒";
+                btnCarrito.CssClass = "btn btn-primary";
             }
 
+            updateContador();
 
         }
     }

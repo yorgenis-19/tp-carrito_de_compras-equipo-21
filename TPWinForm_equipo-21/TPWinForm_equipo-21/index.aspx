@@ -25,6 +25,7 @@
         .botonCarrito::before {
             content: none;
         }
+
     </style>
     <!--Filtro lateral derecho-->
     <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
@@ -76,7 +77,7 @@
     </div>
 
     <div class="alertita" id="alertita" style="display: flex; justify-content: flex-start;">
-        <asp:Label ID="Label1" runat="server" Text=" "></asp:Label>
+            <asp:Label ID="Label1" runat="server" Text=" "></asp:Label>
     </div>
 
 

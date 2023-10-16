@@ -43,14 +43,14 @@
                         <asp:TextBox runat="server" ID="txtNombre" />
                     </div>
 
-                    <div class="marca" style="display: flex; flex-direction: column;">
-                        <label>MARCA:</label>
-                        <asp:DropDownList ID="ddlMarca" runat="server"></asp:DropDownList>
-                    </div>
                     <div class="precio" style="display: flex; flex-direction: column;">
                         <label>PRECIO:</label>
                         <asp:DropDownList ID="ddlPrecio" runat="server"></asp:DropDownList>
                         <asp:TextBox ID="txtPrecio" runat="server" Text="0"></asp:TextBox>
+                    </div>
+                    <div class="marca" style="display: flex; flex-direction: column;">
+                        <label>MARCA:</label>
+                        <asp:DropDownList ID="ddlMarca" runat="server"></asp:DropDownList>
                     </div>
                     <div class="categoria" style="display: flex; flex-direction: column;">
                         <label>CATEGORIA:</label>

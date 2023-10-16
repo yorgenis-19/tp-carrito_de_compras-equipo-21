@@ -67,7 +67,7 @@ namespace TPWinForm_equipo_21.Servicio
                      "FROM ARTICULOS as A " +
                      "LEFT JOIN MARCAS as M ON M.Id = A.IdMarca " +
                      "LEFT JOIN CATEGORIAS as C ON C.Id = A.IdCategoria " +
-                     "WHERE (A.Nombre LIKE '%' + @nombre + '%') OR (A.Descripcion LIKE '%' + @nombre + '%') OR (A.Codigo LIKE '%' + @nombre + '%')" +
+                     "WHERE ((A.Nombre LIKE '%' + @nombre + '%') OR (A.Descripcion LIKE '%' + @nombre + '%') OR (A.Codigo LIKE '%' + @nombre + '%'))" +
                      "AND M.Descripcion LIKE '%' + @marca + '%' " +
                      "AND C.Descripcion LIKE '%' + @categoria + '%' " +
                      "AND ((@esMayor = 1 AND A.Precio > @precio) OR (@esMayor = 0 AND A.Precio <= @precio) OR (@esMayor = 2)) " +
@@ -317,6 +317,39 @@ namespace TPWinForm_equipo_21.Servicio
             {
                 connection.Close();
             }
+        }
+
+        public void popular()
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                CategoriaService categoriaService = new CategoriaService();
+                int idCat = categoriaService.obtener("Sin asignar");
+                datos.setearConsulta("UPDATE ARTICULOS SET IdCategoria = @idCategoria WHERE IdCategoria IS NULL");
+                datos.setearParametro("@idCategoria", idCat);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally { datos.cerrarConexion(); }
+            try
+            {
+                MarcaService marcaService = new MarcaService();
+                int idMarca = marcaService.obtener("Sin asignar");
+                datos.setearConsulta("UPDATE ARTICULOS SET IdMarca = @IdMarca WHERE IdMarca IS NULL");
+                datos.setearParametro("@idMarca", idMarca);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally { datos.cerrarConexion(); }
         }
     }
 }

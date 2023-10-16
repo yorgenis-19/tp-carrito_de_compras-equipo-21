@@ -110,7 +110,7 @@ namespace TPWinForm_equipo_21.Servicio
                 }
                 else
                 {
-                    categoriaID = 0;
+                    categoriaID = -1;
                 }
 
                 return categoriaID;
@@ -220,5 +220,6 @@ namespace TPWinForm_equipo_21.Servicio
                 throw ex;
             }
         }
+
     }
 }

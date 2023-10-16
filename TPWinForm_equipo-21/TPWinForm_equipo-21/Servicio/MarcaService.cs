@@ -112,7 +112,7 @@ namespace TPWinForm_equipo_21.Servicio
                 }
                 else
                 {
-                    marcaID = 0;
+                    marcaID = -1;
                 }
 
                 return marcaID;

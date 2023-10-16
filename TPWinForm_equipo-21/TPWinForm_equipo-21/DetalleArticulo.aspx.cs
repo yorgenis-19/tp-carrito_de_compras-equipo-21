@@ -19,7 +19,7 @@ namespace TPWinForm_equipo_21
 
         private int ObtenerElIdDelArticuloDesdeLaURL()
         {
-            int idArticulo = 0;
+            int idArticulo = -1;
             if (Request.QueryString["id"] != null)
             {
                 if (int.TryParse(Request.QueryString["id"], out idArticulo))
@@ -106,6 +106,11 @@ namespace TPWinForm_equipo_21
                         lblMarcaArticulo.Text = articulo.marca.Descripcion;
                         lblPrecioArticulo.Text = articulo.precio.ToString();
                     }
+                    else
+                    {
+                        Response.Redirect("index.aspx");
+                    }
+
 
 
                     if (estaEnCarrito(articulo))
@@ -148,6 +153,10 @@ namespace TPWinForm_equipo_21
                     repeaterImagenes.DataSource = imagenesValidadas;
                     repeaterImagenes.DataBind();
 
+                }
+                else
+                {
+                    Response.Redirect("index.aspx");
                 }
 
             }

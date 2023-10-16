@@ -50,11 +50,11 @@
                 <asp:Label ID="lblNombreArticulo" runat="server" Text="" CssClass="font-weight-bold"></asp:Label><br />
                 <span class="texto-secundario" >Descripcion:</span>
                 <asp:Label ID="lblDescripcionArticulo" runat="server" Text=""></asp:Label><br />
-                <span class="texto-secundario" >Categoria:</span>
+                <span class="texto-secundario" >Categoria: </span>
                  <asp:Label ID="lblCategoriaArticulo" runat="server" Text=""></asp:Label><br />
-                <span class="texto-secundario" >Marca:</span>
+                <span class="texto-secundario" >Marca: </span>
                 <asp:Label ID="lblMarcaArticulo" runat="server" Text=""></asp:Label><br />
-                <span class="texto-secundario" >Precio:</span>
+                <span class="texto-secundario" >Precio: </span>
                 <asp:Label ID="lblPrecioArticulo" runat="server" Text="" CssClass="font-weight-bold"></asp:Label>
                 <hr />
                 <div class="botonCarrito mt-3">

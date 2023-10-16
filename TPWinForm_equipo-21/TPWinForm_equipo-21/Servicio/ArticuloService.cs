@@ -326,7 +326,7 @@ namespace TPWinForm_equipo_21.Servicio
             {
                 CategoriaService categoriaService = new CategoriaService();
                 int idCat = categoriaService.obtener("Sin asignar");
-                datos.setearConsulta("UPDATE ARTICULOS SET IdCategoria = @idCategoria WHERE IdCategoria IS NULL");
+                datos.setearConsulta("UPDATE A SET A.IdCategoria = @idCategoria FROM ARTICULOS A LEFT JOIN CATEGORIAS C ON C.Id = A.IdCategoria WHERE C.Descripcion is NULL");
                 datos.setearParametro("@idCategoria", idCat);
                 datos.ejecutarAccion();
             }
@@ -340,7 +340,7 @@ namespace TPWinForm_equipo_21.Servicio
             {
                 MarcaService marcaService = new MarcaService();
                 int idMarca = marcaService.obtener("Sin asignar");
-                datos.setearConsulta("UPDATE ARTICULOS SET IdMarca = @IdMarca WHERE IdMarca IS NULL");
+                datos.setearConsulta("UPDATE A SET A.IdMarca = @idMarca FROM ARTICULOS A LEFT JOIN MARCAS M ON M.Id = A.IdMarca WHERE M.Descripcion is NULL");
                 datos.setearParametro("@idMarca", idMarca);
                 datos.ejecutarAccion();
             }

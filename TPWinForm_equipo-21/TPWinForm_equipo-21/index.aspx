@@ -94,7 +94,7 @@
                         <div class="card-body">
                             <h5 style="text-align: center; margin-bottom: 30px;" class="card-title"><%# Eval("nombre") %></h5>
                             <p class="card-text"><%# Eval("descripcion") %></p>
-                            <p class="card-text">Categoria:<%# Eval("categoria") %></p>
+                            <p class="card-text">Categoria: <%# Eval("categoria") %></p>
                             <p class="card-text">Marca: <%# Eval("marca") %></p>
                             <p class="card-text">Precio: <%# Eval("precio") %></p>
                             <hr />
